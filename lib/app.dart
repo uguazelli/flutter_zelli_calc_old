@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_2_application/simple_calculator/simple_calc.dart';
 
-import 'helper/adaptative_theme.dart';
-
 class App extends StatelessWidget {
   // This widget is the root of your application.
   @override

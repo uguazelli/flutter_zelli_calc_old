@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_2_application/helper/adaptative_theme.dart';
+import 'package:flutter_2_application/models/calc.dart';
+import 'package:provider/provider.dart';
 
 AdaptativeTheme adaptativeTheme;
 
@@ -13,11 +15,18 @@ class SimpleCalculator extends StatelessWidget {
         maxWidth: adaptativeTheme.maxHeight,
       ),
       color: Colors.green,
-      child: Column(
-        children: [
-          Display(),
-          Keyboard(),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<Calc>(
+            create: (_) => Calc(),
+          )
         ],
+        child: Column(
+          children: [
+            Display(),
+            Keyboard(),
+          ],
+        ),
       ),
     );
   }
@@ -26,13 +35,14 @@ class SimpleCalculator extends StatelessWidget {
 class Display extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Calc calc = context.watch<Calc>();
     return Expanded(
       flex: 2,
       child: Container(
         alignment: Alignment(0.9, 0.9),
         color: Colors.green,
         child: Text(
-          'Dispay',
+          calc.display,
           style: TextStyle(fontSize: adaptativeTheme.fontSize),
         ),
       ),
@@ -49,47 +59,56 @@ class Keyboard extends StatelessWidget {
           alignment: Alignment(0.9, 0.9),
           color: Colors.blue,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Row(
-                children: [
-                  Key(value: 'raiz'),
-                  Key(value: '%'),
-                  Key(value: 'C'),
-                  Key(value: '/'),
-                ],
+              Expanded(
+                child: Row(
+                  children: [
+                    Key(value: 'raiz'),
+                    Key(value: '%'),
+                    Key(value: 'C'),
+                    Key(value: '/'),
+                  ],
+                ),
               ),
-              Row(
-                children: [
-                  Key(value: '7'),
-                  Key(value: '8'),
-                  Key(value: '9'),
-                  Key(value: 'x'),
-                ],
+              Expanded(
+                child: Row(
+                  children: [
+                    Key(value: '7'),
+                    Key(value: '8'),
+                    Key(value: '9'),
+                    Key(value: 'x'),
+                  ],
+                ),
               ),
-              Row(
-                children: [
-                  Key(value: '4'),
-                  Key(value: '5'),
-                  Key(value: '6'),
-                  Key(value: '-'),
-                ],
+              Expanded(
+                child: Row(
+                  children: [
+                    Key(value: '4'),
+                    Key(value: '5'),
+                    Key(value: '6'),
+                    Key(value: '-'),
+                  ],
+                ),
               ),
-              Row(
-                children: [
-                  Key(value: '1'),
-                  Key(value: '2'),
-                  Key(value: '3'),
-                  Key(value: '+'),
-                ],
+              Expanded(
+                child: Row(
+                  children: [
+                    Key(value: '1'),
+                    Key(value: '2'),
+                    Key(value: '3'),
+                    Key(value: '+'),
+                  ],
+                ),
               ),
-              Row(
-                children: [
-                  Key(value: '+-'),
-                  Key(value: '.'),
-                  Key(value: '0'),
-                  Key(value: '='),
-                ],
+              Expanded(
+                child: Row(
+                  children: [
+                    Key(value: '+-'),
+                    Key(value: '.'),
+                    Key(value: '0'),
+                    Key(value: '='),
+                  ],
+                ),
               ),
             ],
           )),
@@ -98,13 +117,24 @@ class Keyboard extends StatelessWidget {
 }
 
 class Key extends StatelessWidget {
-  String value;
+  final String value;
   Key({this.value});
   @override
   Widget build(BuildContext context) {
+    Calc calc = context.watch<Calc>();
     return Expanded(
       child: GestureDetector(
+        onTap: () => calc.setDisplay(value),
         child: Container(
+          decoration: const BoxDecoration(
+            border: Border(
+              top: BorderSide(width: 0.05),
+              left: BorderSide(width: 0.05),
+              right: BorderSide(width: 0.05),
+              bottom: BorderSide(width: 0.05),
+            ),
+          ),
+          // color: Colors.red,
           alignment: Alignment(0, 0),
           child: Text(
             value,
