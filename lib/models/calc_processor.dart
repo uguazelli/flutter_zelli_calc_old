@@ -6,9 +6,15 @@ class CalcProcessor with ChangeNotifier {
   String saved = '';
   String operation = '';
   bool isPositive = true;
+  int easterEggCount = 0;
   List<String> numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
   void setDisplay(String val) {
+    if (val == '=') {
+      easterEgg();
+    } else {
+      easterEggCount = 0;
+    }
     if (val == 'C') {
       clean();
     } else if (val == '.') {
@@ -95,6 +101,14 @@ class CalcProcessor with ChangeNotifier {
 
   void squareRoot() {
     display = sqrt(double.parse(display)).toString();
+    notifyListeners();
+  }
+
+  easterEgg() {
+    easterEggCount++;
+    if (easterEggCount == 10) {
+      display = 'AIDA,\nYOU ARE SO BEAUTIFUL!';
+    }
     notifyListeners();
   }
 }
