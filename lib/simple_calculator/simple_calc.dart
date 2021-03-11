@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_2_application/helper/adaptative_theme.dart';
-import 'package:flutter_2_application/models/calc.dart';
+import 'package:flutter_2_application/models/calc_processor.dart';
 import 'package:provider/provider.dart';
 
 AdaptativeTheme adaptativeTheme;
@@ -14,11 +14,10 @@ class SimpleCalculator extends StatelessWidget {
         maxHeight: adaptativeTheme.maxHeight,
         maxWidth: adaptativeTheme.maxHeight,
       ),
-      color: Colors.green,
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider<Calc>(
-            create: (_) => Calc(),
+          ChangeNotifierProvider<CalcProcessor>(
+            create: (_) => CalcProcessor(),
           )
         ],
         child: Column(
@@ -35,12 +34,11 @@ class SimpleCalculator extends StatelessWidget {
 class Display extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Calc calc = context.watch<Calc>();
+    CalcProcessor calc = context.watch<CalcProcessor>();
     return Expanded(
       flex: 2,
       child: Container(
         alignment: Alignment(0.9, 0.9),
-        color: Colors.green,
         child: Text(
           calc.display,
           style: TextStyle(fontSize: adaptativeTheme.fontSize),
@@ -57,16 +55,15 @@ class Keyboard extends StatelessWidget {
       flex: 5,
       child: Container(
           alignment: Alignment(0.9, 0.9),
-          color: Colors.blue,
           child: Column(
             children: [
               Expanded(
                 child: Row(
                   children: [
-                    Key(value: 'raiz'),
+                    Key(value: '√'),
                     Key(value: '%'),
                     Key(value: 'C'),
-                    Key(value: '/'),
+                    Key(value: '÷'),
                   ],
                 ),
               ),
@@ -103,7 +100,7 @@ class Keyboard extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    Key(value: '+-'),
+                    Key(value: '±'),
                     Key(value: '.'),
                     Key(value: '0'),
                     Key(value: '='),
@@ -121,7 +118,7 @@ class Key extends StatelessWidget {
   Key({this.value});
   @override
   Widget build(BuildContext context) {
-    Calc calc = context.watch<Calc>();
+    CalcProcessor calc = context.watch<CalcProcessor>();
     return Expanded(
       child: GestureDetector(
         onTap: () => calc.setDisplay(value),

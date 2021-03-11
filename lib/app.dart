@@ -6,7 +6,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'IDEAS Calculator',
+      title: 'Zelli Calculator',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('IDEAS Calculator'),
+        title: Text('Zelli Calculator'),
       ),
       body: Container(
         //making the main container use 100% of safe area
