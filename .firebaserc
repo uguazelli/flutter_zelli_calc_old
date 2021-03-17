@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "zelli-multi-tools"
+  },
+  "targets": {
+    "zelli-multi-tools": {
+      "hosting": {
+        "app": [
+          "aida-calc"
+        ]
+      }
+    }
+  }
+}
