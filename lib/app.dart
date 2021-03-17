@@ -25,9 +25,7 @@ class HomePage extends StatelessWidget {
       ),
       drawer: Menu(),
       body: Container(
-        //making the main container use 100% of safe area
-        width: double.infinity,
-        height: double.infinity,
+        //positioning in the bootom
         alignment: Alignment(0.0, 0.9),
         child: SimpleCalculator(),
       ),

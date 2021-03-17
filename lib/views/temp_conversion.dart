@@ -28,13 +28,20 @@ class HomePage extends StatelessWidget {
       ),
       drawer: Menu(),
       body: Container(
-        constraints: BoxConstraints(
-          maxHeight: adaptativeTheme.maxHeight,
-          maxWidth: adaptativeTheme.maxHeight,
-        ),
-        color: Colors.red,
-        child: Column(
-          children: [Celsius()],
+        alignment: Alignment(0.0, 0.9),
+        child: Container(
+          constraints: BoxConstraints(
+            maxHeight: adaptativeTheme.maxHeight,
+            maxWidth: adaptativeTheme.maxHeight,
+          ),
+          color: Colors.yellow,
+          child: Column(
+            children: [
+              Celsius(),
+              Fahrenheit(),
+              Keyboard(),
+            ],
+          ),
         ),
       ),
     );
@@ -45,10 +52,42 @@ class Celsius extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     adaptativeTheme = AdaptativeTheme(MediaQuery.of(context).size.width);
-    return Container(
-      alignment: Alignment(0.9, 0.9),
-      color: Colors.green,
-      child: Text('Here we go'),
+    return Expanded(
+      flex: 1,
+      child: Container(
+        alignment: Alignment(0.9, 0.9),
+        color: Colors.green,
+        child: Text('Celsius'),
+      ),
+    );
+  }
+}
+
+class Fahrenheit extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    adaptativeTheme = AdaptativeTheme(MediaQuery.of(context).size.width);
+    return Expanded(
+      flex: 1,
+      child: Container(
+        alignment: Alignment(0.9, 0.9),
+        color: Colors.blue,
+        child: Text('Fahrenheit'),
+      ),
+    );
+  }
+}
+
+class Keyboard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    adaptativeTheme = AdaptativeTheme(MediaQuery.of(context).size.width);
+    return Expanded(
+      flex: 5,
+      child: Container(
+        color: Colors.orange,
+        child: Text('KeyBoard'),
+      ),
     );
   }
 }

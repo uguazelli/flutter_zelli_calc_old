@@ -107,7 +107,7 @@ class CalcProcessor with ChangeNotifier {
   easterEgg() {
     easterEggCount++;
     if (easterEggCount == 10) {
-      display = 'AIDA,\nYOU ARE SO BEAUTIFUL!';
+      display = 'Nice Job, you found it!';
     }
     notifyListeners();
   }
