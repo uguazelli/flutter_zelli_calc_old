@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'app.dart';
+import 'views/home.dart';
 
 void main() {
-  runApp(App());
+  runApp(Home());
 }

@@ -1,11 +1,36 @@
 import 'package:flutter/material.dart';
+import 'menu.dart';
 import 'package:flutter_2_application/helper/adaptative_theme.dart';
 import 'package:flutter_2_application/models/calc_processor.dart';
 import 'package:provider/provider.dart';
 
+class Home extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Zelli Calculator',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Zelli Calculator'),
+        ),
+        drawer: Menu(),
+        body: Container(
+          //positioning in the bootom
+          alignment: Alignment(0.0, 0.9),
+          child: HomePage(),
+        ),
+      ),
+    );
+  }
+}
+
 AdaptativeTheme adaptativeTheme;
 
-class SimpleCalculator extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     adaptativeTheme = AdaptativeTheme(MediaQuery.of(context).size.width);
@@ -120,7 +145,7 @@ class Key extends StatelessWidget {
   Widget build(BuildContext context) {
     CalcProcessor calc = context.watch<CalcProcessor>();
     return Expanded(
-      child: GestureDetector(
+      child: InkWell(
         onTap: () => calc.setDisplay(value),
         child: Container(
           decoration: const BoxDecoration(
