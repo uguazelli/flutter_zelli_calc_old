@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../temp_conversion.dart';
+import 'temp_conversion.dart';
+import 'home.dart';
 
 class Menu extends StatelessWidget {
   @override
@@ -22,7 +22,10 @@ class Menu extends StatelessWidget {
           ListTile(
             title: Text('Simple Calculator'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Home()),
+              );
             },
           ),
           ListTile(
